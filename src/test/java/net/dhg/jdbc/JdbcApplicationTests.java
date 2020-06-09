@@ -25,7 +25,7 @@ class JdbcApplicationTests {
         System.out.println("debug======>"+dataSource.getClass().getName());
         try {
             Connection connection = dataSource.getConnection();
-            System.out.println("debug======>"+connection);//HikariProxyConnection@9361871 wrapping com.mysql.cj.jdbc.ConnectionImpl表示底层是jdbc实现，hikari代理
+            System.out.println("debug======>"+connection);
             connection.close();
         }catch (Exception e){
             System.out.println(e.getMessage());
