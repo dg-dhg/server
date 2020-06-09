@@ -36,6 +36,9 @@ spring:
 # 应用服务web访问端口
 server:
   port: 8080
+mybatis:
+  typeAliasesPackage: net.dhg.jdbc.entity
+  mapper-locations: classpath:mybatis/mapper/*.xml
 
 model:
   myName: hello
