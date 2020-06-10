@@ -45,10 +45,9 @@
                         <li>
                             <a th:href="@{/loginUser/index}">首页</a>
                         </li>
-                        <!--todo 如果未登录,显示登录按钮-->
                         <li>
                             <div sec:authorize="!isAuthenticated()">
-                                <a class="item" th:href="@{/login}">
+                                <a class="item" th:href="@{/loginUser/login}">
                                     <i class="icon-tag"></i>登录
                                 </a>
                             </div>

@@ -19,7 +19,9 @@ public class NewASpringSecurityConfiguration extends WebSecurityConfigurerAdapte
                 .antMatchers("/loginUser/level2/**").hasRole("vip2")
                 .antMatchers("/loginUser/level3/**").hasRole("vip3");
         //2登录页
-        http.formLogin().loginPage("/loginUser./login");
+        http.formLogin().loginPage("/loginUser/login").loginProcessingUrl("/login")
+                .usernameParameter("name")
+                .passwordParameter("pwd");
 
         //3.对注销进行一些操作
         //.logout().deleteCookies(&quot;remove&quot;).invalidateHttpSession(false)//一般不清空session和cookie
@@ -31,18 +33,19 @@ public class NewASpringSecurityConfiguration extends WebSecurityConfigurerAdapte
         http.csrf().disable();
 
         //5.勿忘我 默认最长记忆时间两周
-        http.rememberMe();
+        http.rememberMe().rememberMeParameter("rememberMe");
+
 
     }
 
     /*认证。。。在2.1.x时可用，在2.2.x后需加密密码
-    * 在ss5（SpringSecurity中有许多的加密的方法5）'
-    * 这里推荐使用BCryptEncoder
-    * */
+     * 在ss5（SpringSecurity中有许多的加密的方法5）'
+     * 这里推荐使用BCryptEncoder
+     * */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         /*这是在内存中设置账号和密码，一般是在数据库中查找进行校验*/
-        BCryptPasswordEncoder encoder =new BCryptPasswordEncoder();
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         auth.inMemoryAuthentication().passwordEncoder(encoder)
                 .withUser("dhg").password(encoder.encode("123456")).roles("vip1", "vip2")
                 .and().withUser("root").password(encoder.encode("123456")).roles("vip1", "vip2", "vip3")

@@ -1,7 +1,7 @@
 package net.dhg.jdbc;
 
 import net.dhg.jdbc.modeling.Model;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,12 +22,12 @@ class JdbcApplicationTests {
 
     @Test
     void contextLoads() {
-        System.out.println("debug======>"+dataSource.getClass().getName());
+        System.out.println("debug======>" + dataSource.getClass().getName());
         try {
             Connection connection = dataSource.getConnection();
-            System.out.println("debug======>"+connection);
+            System.out.println("debug======>" + connection);
             connection.close();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
